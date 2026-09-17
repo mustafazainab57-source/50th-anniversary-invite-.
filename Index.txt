@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>50th Wedding Anniversary — RSVP</title>
+
+<meta property="og:title" content="You're invited: Shk. Shabbir & Fatema's 50th Wedding Anniversary" />
+<meta property="og:description" content="Sunday, 25th October 2026 · 12:00 PM onwards · Sunville Banquets World, Mumbai. Tap to RSVP." />
+<meta property="og:image" content="invite-card.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<style>
+  :root{
+    --cream: #f5ecd9;
+    --cream-light: #faf5e8;
+    --gold: #b8923f;
+    --gold-dark: #8a6d2f;
+    --green: #1d3a2c;
+    --text: #2b2b26;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-light) 100%);
+    color: var(--text);
+    display:flex;
+    justify-content:center;
+    padding: 24px 14px 60px;
+  }
+  .card{
+    width:100%;
+    max-width:480px;
+    background: var(--cream-light);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: 28px 22px 34px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .invite-img{
+    width:100%;
+    border-radius: 4px;
+    margin-bottom: 22px;
+    display:block;
+  }
+  .ornament{
+    text-align:center;
+    color: var(--gold);
+    font-size: 20px;
+    margin: 10px 0 18px;
+  }
+  h1{
+    text-align:center;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--green);
+    margin: 0 0 4px;
+  }
+  .subtitle{
+    text-align:center;
+    font-style: italic;
+    color: var(--gold-dark);
+    margin-bottom: 18px;
+    font-size: 15px;
+  }
+  .details{
+    text-align:center;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+    color: var(--text);
+  }
+  .details b{ color: var(--green); }
+  .greeting{
+    text-align:center;
+    font-size: 18px;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+  .greeting-name{ font-weight: bold; }
+  .invited-note{
+    text-align:center;
+    font-size: 14px;
+    color: var(--gold-dark);
+    margin-bottom: 18px;
+  }
+  .question{
+    text-align:center;
+    margin: 14px 0 20px;
+    font-size: 15px;
+  }
+  .choices{
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .choice-btn{
+    padding: 13px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gold);
+    background: white;
+    font-size: 15.5px;
+    font-family: inherit;
+    cursor: pointer;
+    text-align:left;
+    transition: all 0.15s ease;
+  }
+  .choice-btn.selected{
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+  textarea{
+    width:100%;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 60px;
+    margin-bottom: 16px;
+  }
+  .submit-btn{
+    width:100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: var(--gold-dark);
+    color:white;
+    font-size: 16px;
+    font-family: inherit;
+    cursor:pointer;
+    letter-spacing: 0.5px;
+  }
+  .submit-btn:disabled{
+    opacity: 0.5;
+    cursor:not-allowed;
+  }
+  .footnote{
+    text-align:center;
+    font-size: 12.5px;
+    color: var(--gold-dark);
+    margin-top: 18px;
+    font-style: italic;
+  }
+  .status-box{
+    display:none;
+    text-align:center;
+    padding: 20px 10px;
+  }
+  .status-box.show{ display:block; }
+  .status-box .icon{ font-size: 40px; margin-bottom: 10px; }
+  .status-box p{ font-size: 15px; line-height:1.6; }
+  #formSection.hide{ display:none; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="invite-img" src="invite-card.jpg" alt="50th Wedding Anniversary invitation" />
+
+    <div class="ornament">✦</div>
+    <h1>50th WEDDING ANNIVERSARY</h1>
+    <div class="subtitle">of Shk. Shabbir &amp; Fatema</div>
+
+    <div class="details">
+      <b>Sunday, 25th October 2026</b><br/>
+      12:00 PM onwards<br/>
+      Sunville Banquets World, Mumbai
+    </div>
+
+    <div id="formSection">
+      <div class="greeting">
+        Ahlan, <span class="greeting-name" id="guestName">friend</span> 👋
+      </div>
+      <div class="invited-note" id="invitedNote"></div>
+      <div class="question">Will you be joining us for this special celebration?</div>
+
+      <div class="choices">
+        <button class="choice-btn" id="btnYes" onclick="selectAttending(true)">🌸 Yes, we'll be there</button>
+        <button class="choice-btn" id="btnNo" onclick="selectAttending(false)">😔 Sorry, can't make it</button>
+      </div>
+
+      <textarea id="message" placeholder="Message for the family (optional)"></textarea>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitRSVP()" disabled>Send my RSVP</button>
+
+      <div class="footnote">Kindly reply by 15th October 2026</div>
+    </div>
+
+    <div class="status-box" id="statusBox">
+      <div class="icon">🌸</div>
+      <p id="statusText">Thank you! Your RSVP has been recorded.</p>
+    </div>
+  </div>
+
+<script>
+  // ---- CONFIG: Your Google Apps Script Web App URL is connected ----
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT6-o3p3S6qVbO5xKz6jT_d8HwJv4nF2m9L7k1R5xP/exec"; 
+  // ------------------------------------------------------------------
+
+  const params = new URLSearchParams(window.location.search);
+  const guestName = (params.get("g") || "Friend").replace(/_/g, " ");
+  const invitedCount = parseInt(params.get("n") || "1", 10);
+
+  document.getElementById("guestName").textContent = guestName;
+  document.getElementById("invitedNote").textContent =
+    invitedCount > 1
+      ? `You and your family (${invitedCount}) are invited.`
+      : `You are invited.`;
+
+  let attending = null;
+
+  function selectAttending(isYes){
+    attending = isYes;
+    document.getElementById("btnYes").classList.toggle("selected", isYes);
+    document.getElementById("btnNo").classList.toggle("selected", !isYes);
+    document.getElementById("submitBtn").disabled = false;
+  }
+
+  function submitRSVP(){
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    const payload = {
+      guest: guestName,
+      attending: attending ? "Yes" : "No",
+      invited: invitedCount,
+      message: document.getElementById("message").value,
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      showStatus(attending);
+    }).catch(() => {
+      showStatus(attending);
+    });
+  }
+
+  function showStatus(isYes){
+    document.getElementById("formSection").classList.add("hide");
+    const statusBox = document.getElementById("statusBox");
+    statusBox.classList.add("show");
+    document.querySelector(".icon").textContent = isYes ? "🌸" : "🤍";
+    document.getElementById("statusText").textContent = isYes
+      ? "Thank you! Your RSVP has been recorded. We can't wait to celebrate with you."
+      : "Thank you for letting us know. You'll be missed at the celebration!";
+  }
+</script>
+</body>
+</html>
