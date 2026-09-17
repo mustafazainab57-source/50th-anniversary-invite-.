@@ -197,8 +197,8 @@
   </div>
 
 <script>
-  // ---- CONFIG: Your Google Apps Script Web App URL ----
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8sjqJ-jDi1lWrP_iZj1-5t0BxZHHdiuD0SmuUH9lGd6fZzELwhNixNTCWz04-HhKCbA/exec"; 
+  // ---- CONFIG: Your New Google Apps Script Web App URL ----
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTgFHtVDlxXhRx_w_cKjZU7lil9QQgcyTO1m8RenTMVv2V_Nndob_uxBqVYozhCRCdDg/exec"; 
   // ----------------------------------------------------
 
   const params = new URLSearchParams(window.location.search);
@@ -207,6 +207,12 @@
 
   document.getElementById("guestName").textContent = guestName;
   document.getElementById("invitedNote").textContent = `Invitees — ${invitedCount}`;
+
+  // Check if this specific guest already submitted an RSVP on this device
+  const storageKey = "rsvp_submitted_" + guestName.replace(/\s+/g, "_");
+  if (localStorage.getItem(storageKey) === "true") {
+    showAlreadySubmitted();
+  }
 
   let attending = null;
 
@@ -236,8 +242,10 @@
       headers: { "Content-Type": "text/plain" },
       body: JSON.stringify(payload)
     }).then(() => {
+      localStorage.setItem(storageKey, "true");
       showStatus(attending);
     }).catch(() => {
+      localStorage.setItem(storageKey, "true");
       showStatus(attending);
     });
   }
@@ -250,6 +258,14 @@
     document.getElementById("statusText").textContent = isYes
       ? "Thank you! Your RSVP has been recorded. We can't wait to celebrate with you."
       : "Thank you for letting us know. You'll be missed at the celebration!";
+  }
+
+  function showAlreadySubmitted(){
+    document.getElementById("formSection").classList.add("hide");
+    const statusBox = document.getElementById("statusBox");
+    statusBox.classList.add("show");
+    document.querySelector(".icon").textContent = "✨";
+    document.getElementById("statusText").textContent = `Hi ${guestName}, you have already submitted your RSVP for this event. Thank you!`;
   }
 </script>
 </body>
