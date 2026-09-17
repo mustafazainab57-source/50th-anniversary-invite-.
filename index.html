@@ -198,7 +198,7 @@
 
 <script>
   // ---- CONFIG: Your Google Apps Script Web App URL ----
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT6-o3p3S6qVbO5xKz6jT_d8HwJv4nF2m9L7k1R5xP/exec"; 
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTaTZRFclcEsc6Tjx2uggXUgiYkkFSzBUsQ9TNpWRJNELy7srDVxCb24jGlLZsjKH6Pg/exec"; 
   // ----------------------------------------------------
 
   const params = new URLSearchParams(window.location.search);
@@ -206,8 +206,6 @@
   const invitedCount = parseInt(params.get("n") || "1", 10);
 
   document.getElementById("guestName").textContent = guestName;
-  
-  // Custom invitee text
   document.getElementById("invitedNote").textContent = `Invitees — ${invitedCount}`;
 
   let attending = null;
@@ -256,4 +254,3 @@
 </script>
 </body>
 </html>
-Const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTaTZRFclcEsc6Tjx2uggXUgiYkkFSzBUsQ9TNpWRJNELy7srDVxCb24jGlLZsjKH6Pg/exec";
