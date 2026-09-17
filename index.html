@@ -197,19 +197,18 @@
   </div>
 
 <script>
-  // ---- CONFIG: Your Google Apps Script Web App URL is connected ----
+  // ---- CONFIG: Your Google Apps Script Web App URL ----
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT6-o3p3S6qVbO5xKz6jT_d8HwJv4nF2m9L7k1R5xP/exec"; 
-  // ------------------------------------------------------------------
+  // ----------------------------------------------------
 
   const params = new URLSearchParams(window.location.search);
   const guestName = (params.get("g") || "Friend").replace(/_/g, " ");
   const invitedCount = parseInt(params.get("n") || "1", 10);
 
   document.getElementById("guestName").textContent = guestName;
-  document.getElementById("invitedNote").textContent =
-    invitedCount > 1
-      ? `You and your family (${invitedCount}) are invited.`
-      : `You are invited.`;
+  
+  // Custom invitee text
+  document.getElementById("invitedNote").textContent = `Invitees — ${invitedCount}`;
 
   let attending = null;
 
