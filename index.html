@@ -6,7 +6,7 @@
 <title>50th Wedding Anniversary — RSVP</title>
 
 <meta property="og:title" content="You're invited: Shk. Shabbir & Fatema's 50th Wedding Anniversary" />
-<meta property="og:description" content="Sunday, 25th October 2026 · 12:00 PM onwards · Sunville Banquets World, Mumbai. Tap to RSVP." />
+<meta property="og:description" content="Sunday, 25th October 2026 · 12:00 PM onwards · Sunville Banquets Worli, Mumbai. Tap to RSVP." />
 <meta property="og:image" content="invite-card.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -168,7 +168,7 @@
     <div class="details">
       <b>Sunday, 25th October 2026</b><br/>
       12:00 PM onwards<br/>
-      Sunville Banquets World, Mumbai
+      Sunville Banquets Worli, Mumbai
     </div>
 
     <div id="formSection">
@@ -179,7 +179,7 @@
       <div class="question">Will you be joining us for this special celebration?</div>
 
       <div class="choices">
-        <button class="choice-btn" id="btnYes" onclick="selectAttending(true)">🌸 Yes, we'll be there</button>
+        <button class="choice-btn" id="btnYes" onclick="selectAttending(true)">✨ Yes, we'll be there</button>
         <button class="choice-btn" id="btnNo" onclick="selectAttending(false)">😔 Sorry, can't make it</button>
       </div>
 
@@ -191,7 +191,7 @@
     </div>
 
     <div class="status-box" id="statusBox">
-      <div class="icon">🌸</div>
+      <div class="icon">✨</div>
       <p id="statusText">Thank you! Your RSVP has been recorded.</p>
     </div>
   </div>
@@ -254,7 +254,7 @@
     document.getElementById("formSection").classList.add("hide");
     const statusBox = document.getElementById("statusBox");
     statusBox.classList.add("show");
-    document.querySelector(".icon").textContent = isYes ? "🌸" : "🤍";
+    document.querySelector(".icon").textContent = isYes ? "✨" : "🤍";
     document.getElementById("statusText").textContent = isYes
       ? "Thank you! Your RSVP has been recorded. We can't wait to celebrate with you."
       : "Thank you for letting us know. You'll be missed at the celebration!";
