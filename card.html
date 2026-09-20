@@ -72,7 +72,7 @@
 <div class="card-container">
     <h1>50th Anniversary Celebration</h1>
     
-    <!-- Dynamic Greeting -->
+    <!-- This dynamically changes to match whoever opens the link -->
     <div class="greeting" id="guestGreeting">Ahlan Guest</div>
 
     <p>We warmly invite you to join us in celebrating this joyous milestone of 50 years together.</p>
@@ -88,23 +88,21 @@
 </div>
 
 <script>
-    // Automatically extract guest name from URL if provided (e.g. card.html?name=Rashida)
+    // This grabs the guest name from the URL automatically for any guest
     const urlParams = new URLSearchParams(window.location.search);
     const guestName = urlParams.get('name');
 
     if (guestName) {
-        // Decode and format the name properly
         const decodedName = decodeURIComponent(guestName);
         document.getElementById('guestGreeting').innerText = `Ahlan ${decodedName}`;
     } else {
         document.getElementById('guestGreeting').innerText = `Ahlan Family & Friends`;
     }
 
-    // Optional: Setup RSVP back button to WhatsApp organizer
     document.getElementById('rsvpLink').addEventListener('click', function(e) {
         e.preventDefault();
         const rsvpMessage = encodeURIComponent(`Hello, I would like to RSVP for the 50th Anniversary celebration! ${guestName ? '(Guest: ' + guestName + ')' : ''}`);
-        window.location.href = `https://wa.me/+96500000000?text=${rsvpMessage}`; // Replace with your organizer WhatsApp number if desired
+        window.location.href = `https://wa.me/+96599056686?text=${rsvpMessage}`;
     });
 </script>
 
