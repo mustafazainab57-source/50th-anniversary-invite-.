@@ -48,7 +48,6 @@
 </div>
 
 <script>
-    // Exact guest list extracted directly from your Excel sheet with original formatting and + signs preserved
     const guests = [
         { no: 1, name: "Shk.Mohammadi Electricwala", mobile: "+96599463093", invitees: 8 },
         { no: 2, name: "Shk.Najmuddin Electricwala", mobile: "+971503752701", invitees: 6 },
@@ -103,7 +102,6 @@
         { no: 51, name: "Abbasbhai Sukshowala", mobile: "+96597615052", invitees: 2 }
     ];
 
-    // REPLACE THIS with your actual live GitHub Pages URL
     const websiteLink = "https://mustafazainab57-source.github.io/50th-anniversary-invite-/"; 
 
     const tbody = document.querySelector("#guestTable tbody");
@@ -115,9 +113,8 @@
         if (guest.mobile === "") {
             actionHtml = `<span class="btn-disabled">No Number</span>`;
         } else {
-            // Clean mobile for wa.me link (remove spaces, slashes, plus signs for the URL format)
             let cleanNumber = guest.mobile.split('/')[0].replace(/[\s\+\-\(\)]/g, '');
-            let message = `Salam ${guest.name},\n\nYou and your family (${guest.invitees} guests) are cordially invited to our 50th Anniversary celebration! 🎉\n\nPlease view your invite details and RSVP here:\n${websiteLink}\n\nWe look forward to celebrating with you!`;
+            let message = `Salam ${guest.name},\n\nYou are cordially invited to our 50th Anniversary celebration! 🎉\n\nPlease view your invite details and RSVP here:\n${websiteLink}\n\nWe look forward to celebrating with you!`;
             let whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
             
             actionHtml = `<a href="${whatsappUrl}" target="_blank" class="btn" onclick="markSent(this)">Send WhatsApp</a>`;
