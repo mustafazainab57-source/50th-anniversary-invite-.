@@ -202,17 +202,15 @@
   // ----------------------------------------------------
 
   const params = new URLSearchParams(window.location.search);
-  // Supports both 'g' and 'name' parameters so it works seamlessly with your dashboard
   const rawName = params.get("g") || params.get("name") || "Friend";
   const guestName = rawName.replace(/_/g, " ");
   
-  // Pulls the invitees count from the URL if available, otherwise defaults to 1 or you can hook it to your table
-  const invitedCount = parseInt(params.get("n") || "1", 10);
+  // Directly grab the invitees value as text/number so "All" won't become NaN
+  const invitedValue = params.get("n") || "1";
 
   document.getElementById("guestName").textContent = guestName;
-  document.getElementById("invitedNote").textContent = `Invitees — ${invitedCount}`;
+  document.getElementById("invitedNote").textContent = `Invitees — ${invitedValue}`;
 
-  // Check if this specific guest already submitted an RSVP on this device
   const storageKey = "rsvp_submitted_" + guestName.replace(/\s+/g, "_");
   if (localStorage.getItem(storageKey) === "true") {
     showAlreadySubmitted();
@@ -235,7 +233,7 @@
     const payload = {
       guest: guestName,
       attending: attending ? "Yes" : "No",
-      invited: invitedCount,
+      invited: invitedValue,
       message: document.getElementById("message").value,
       timestamp: new Date().toISOString()
     };
