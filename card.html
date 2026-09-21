@@ -205,7 +205,7 @@
   const rawName = params.get("g") || params.get("name") || "Friend";
   const guestName = rawName.replace(/_/g, " ");
   
-  // Directly grab the invitees value as text/number so "All" won't become NaN
+  // Directly grab the invitees value as text/number so words like "All" won't become NaN
   const invitedValue = params.get("n") || "1";
 
   document.getElementById("guestName").textContent = guestName;
