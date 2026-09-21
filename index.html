@@ -113,7 +113,7 @@
         } else {
             let cleanNumber = guest.mobile.split('/')[0].replace(/[\s\+\-\(\)]/g, '');
             let websiteLink = `https://mustafazainab57-source.github.io/invite/card.html?name=${encodeURIComponent(guest.name)}`;
-            let message = `Salam ${guest.name},\n\nYou are cordially invited to our 50th Anniversary celebration! 🎉\n\nPlease view your invite details and RSVP here:\n${websiteLink}\n\nWe look forward to celebrating with you!`;
+            let message = `Salam ${guest.name},\n\nYou are cordially invited to our parents 50th Anniversary celebration! 🎉\n\nPlease view your invite details and RSVP here:\n${websiteLink}\n\nWe look forward to celebrating with you!`;
             let whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
             
             actionHtml = `<a href="${whatsappUrl}" target="_blank" class="btn" onclick="markSent(this)">Send WhatsApp</a>`;
