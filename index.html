@@ -27,7 +27,7 @@
     <p class="subtitle">Click "Send WhatsApp" next to each guest. The message and seat count will open automatically!</p>
     
     <div class="stats">
-        <span id="totalGuests">Total Guests: 51</span>
+        <span id="totalGuests">Total Guests: 53</span>
         <span>Status: Ready to send</span>
     </div>
 
@@ -49,10 +49,10 @@
 
 <script>
     const guests = [
-        { no: 1, name: "Shk.Mohammadi Electricwala", mobile: "+96599463093", invitees: 8 },
-        { no: 2, name: "Shk.Najmuddin Electricwala", mobile: "+971503752701", invitees: 6 },
-        { no: 3, name: "Shk.Mustansir Electricwala", mobile: "+96599552341", invitees: 6 },
-        { no: 4, name: "Shk.Kutbuddin Electricwala", mobile: "+971529584652", invitees: 4 },
+        { no: 1, name: "Shk.Mohammadi Electricwala", mobile: "+96599463093", invitees: "All" },
+        { no: 2, name: "Shk.Najmuddin Electricwala", mobile: "+971503752701", invitees: "All" },
+        { no: 3, name: "Shk.Mustansir Electricwala", mobile: "+96599552341", invitees: "All" },
+        { no: 4, name: "Shk.Kutbuddin Electricwala", mobile: "+971529584652", invitees: "All" },
         { no: 5, name: "Zoebbhai Bahrainwala", mobile: "+919867447225", invitees: 2 },
         { no: 6, name: "Shk.Ebrahimbhai Miyaji", mobile: "+919660981946", invitees: 6 },
         { no: 7, name: "Husainaben Peethwala", mobile: "+919950217074", invitees: 2 },
@@ -96,24 +96,44 @@
         { no: 45, name: "Mustafabhai Obriwala", mobile: "+97152408 7053", invitees: 2 },
         { no: 46, name: "Rashida", mobile: "+919082997631", invitees: 1 },
         { no: 47, name: "M.Aliakbarbhai Sagir", mobile: "+96599573286", invitees: 4 },
-        { no: 48, name: "Adnanbhai Obriwala", mobile: "+96566258952", invitees: 2 },
-        { no: 49, name: "Aliakbarbhai Seth", mobile: "+96565549106", invitees: 2 },
-        { no: 50, name: "Ismailbhai Seth", mobile: "+96569922527", invitees: 2 },
-        { no: 51, name: "Abbasbhai Sukshowala", mobile: "+96597615052", invitees: 2 }
+        { no: 48, name: "Adnanbhai Obriwala", mobile: "+96566258952", invitees: "All" },
+        { no: 49, name: "Aliakbarbhai Seth", mobile: "+96565549106", invitees: "All" },
+        { no: 50, name: "Ismailbhai Seth", mobile: "+96569922527", invitees: "All" },
+        { no: 51, name: "Abbasbhai Sukshowala", mobile: "+96597615052", invitees: "All" },
+        { no: 52, name: "Testing One", mobile: "+96599056686", invitees: "All" },
+        { no: 53, name: "Testing Two", mobile: "+96567740624", invitees: 2 }
     ];
+
+    function getFormattedName(guest) {
+        let name = guest.name;
+        // Skip title for Rashida (No. 46) or testing rows
+        if (guest.no === 46 || guest.no === 52 || guest.no === 53) {
+            return name;
+        }
+        if (name.startsWith("Shk.") || name.startsWith("Shk ")) {
+            return name;
+        }
+        const femaleNames = ["Husainaben", "Ajabben", "Shirin", "Sakinaben", "Fatimaben", "Mariyamben", "Zainab"];
+        if (femaleNames.some(f => name.includes(f)) || name.endsWith("ben")) {
+            return "Mrs. " + name;
+        } else {
+            return "Mr. " + name;
+        }
+    }
 
     const tbody = document.querySelector("#guestTable tbody");
 
     guests.forEach(guest => {
         let tr = document.createElement("tr");
+        let formattedName = getFormattedName(guest);
 
         let actionHtml = "";
         if (guest.mobile === "") {
             actionHtml = `<span class="btn-disabled">No Number</span>`;
         } else {
             let cleanNumber = guest.mobile.split('/')[0].replace(/[\s\+\-\(\)]/g, '');
-            let websiteLink = `https://mustafazainab57-source.github.io/invite/card.html?name=${encodeURIComponent(guest.name)}`;
-            let message = `Salam ${guest.name},\n\nYou are cordially invited to our parents 50th Anniversary celebration! 🎉\n\nPlease view your invite details and RSVP here:\n${websiteLink}\n\nWe look forward to celebrating with you!`;
+            let websiteLink = `https://mustafazainab57-source.github.io/invite/card.html?name=${encodeURIComponent(formattedName)}&n=${encodeURIComponent(guest.invitees)}`;
+            let message = `Salam ${formattedName},\n\nYou are cordially invited to our parents 50th Anniversary celebration! 🎉\n\nPlease view your invite details and RSVP here:\n${websiteLink}\n\nWe look forward to celebrating with you!`;
             let whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
             
             actionHtml = `<a href="${whatsappUrl}" target="_blank" class="btn" onclick="markSent(this)">Send WhatsApp</a>`;
@@ -121,7 +141,7 @@
 
         tr.innerHTML = `
             <td>${guest.no}</td>
-            <td><strong>${guest.name}</strong></td>
+            <td><strong>${formattedName}</strong></td>
             <td>${guest.mobile || '(Blank)'}</td>
             <td>${guest.invitees}</td>
             <td>${actionHtml}</td>
